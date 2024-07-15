@@ -1,7 +1,7 @@
 import "./pages/index.css";
 import { initialCards } from "./components/cards.js";
 import { openModal, closeModal } from "./components/modal.js";
-import { addCard, deleteCard, like } from "./components/card";
+import { createCard, deleteCard, likeCard } from "./components/card";
 
 // @todo: Темплейт карточки
 const cardTemplate = document.querySelector("#card-template").content;
@@ -34,7 +34,7 @@ const inputUrlNewCardForm = newCardForm.querySelector(".popup__input_type_url");
 // @todo: Вывести карточки на страницу
 initialCards.forEach(function (item) {
   cardsList.append(
-    addCard(cardTemplate, item, deleteCard, like, openCardImage)
+    createCard(cardTemplate, item, deleteCard, likeCard, openCardImage)
   );
 });
 
@@ -83,7 +83,7 @@ addButton.addEventListener("click", function (evt) {
   openModal(popupTypeAdd);
 });
 
-function cardFormSubmit(evt, list, addCard, template, close) {
+function cardFormSubmit(evt, list, createCard, template, close) {
   evt.preventDefault();
   const cardName = inputNameNewCardForm.value;
   const url = inputUrlNewCardForm.value;
@@ -93,16 +93,16 @@ function cardFormSubmit(evt, list, addCard, template, close) {
   };
 
   list.prepend(
-    addCard(template, cardDescription, deleteCard, like, openCardImage)
+    createCard(template, cardDescription, deleteCard, likeCard, openCardImage)
   );
   close(popupTypeAdd);
 }
 
 newCardForm.addEventListener("submit", function (evt) {
-  cardFormSubmit(evt, cardsList, addCard, cardTemplate, closeModal);
+  cardFormSubmit(evt, cardsList, createCard, cardTemplate, closeModal);
 });
 //Плавное открытие и закрытие попапов
-const thinAnimation = document.querySelectorAll(".popup");
-thinAnimation.forEach((popup) => {
+const smoothlyPopup = document.querySelectorAll(".popup");
+smoothlyPopup.forEach((popup) => {
   popup.classList.add("popup_is-animated");
 });

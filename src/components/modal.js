@@ -1,7 +1,7 @@
 function openModal(modal) {
   modal.classList.add("popup_is-opened");
   modal.addEventListener("click", closeModalOnOverlayClick);
-  
+  document.addEventListener("keydown", closeModalOnEsc);
 }
 
 function closeModal(modal) {
